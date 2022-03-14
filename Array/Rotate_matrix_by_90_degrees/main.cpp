@@ -26,16 +26,13 @@ void rotate90clockwise(int **mat)
     }
 }
 int main() {
-    int r, c;
-    cin >> r >> c;
     int *mat[n];
-    for(int i = 0; i < r; i++) {
+    for(int i = 0; i < n; i++) {
         mat[i] = (int *)malloc(n * sizeof(int));
-        for(int j = 0; j < c; j++)
+        for(int j = 0; j < n; j++)
             cin >> mat[i][j];
     }
     rotate90clockwise(mat);
     print(mat);
-    // free(mat);
     return 0;
 }

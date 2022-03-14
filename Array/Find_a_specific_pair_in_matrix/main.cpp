@@ -59,15 +59,12 @@ int findMaxValue(int **mat)
 }
 
 int main() {
-    int r, c;
-    cin >> r >> c;
-    int *mat[r];
-    for(int i = 0; i < r; i++) {
+    int *mat[N];
+    for(int i = 0; i < N; i++) {
         mat[i] = (int *)malloc(N * sizeof(int));
-        for(int j = 0; j < c; j++)
+        for(int j = 0; j < N; j++)
             cin >> mat[i][j];
     }
     cout << findMaxValue(mat) << endl;
-    free(mat);
     return 0;
 }
