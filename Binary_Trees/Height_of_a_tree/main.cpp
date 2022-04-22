@@ -1,4 +1,6 @@
 // { Driver Code Starts
+//Initial template for C++
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -7,17 +9,13 @@ struct Node
     int data;
     struct Node *left;
     struct Node *right;
-};
-// Utility function to create a new Tree Node
-Node* newNode(int val)
-{
-    Node* temp = new Node;
-    temp->data = val;
-    temp->left = NULL;
-    temp->right = NULL;
-    
-    return temp;
-}
+
+    Node(int val) {
+        data = val;
+        left = right = NULL;
+    }
+}; 
+
 // Function to Build Tree
 Node* buildTree(string str)
 {   
@@ -34,7 +32,7 @@ Node* buildTree(string str)
         ip.push_back(str);
         
     // Create the root of the tree
-    Node* root = newNode(stoi(ip[0]));
+    Node *root = new Node(stoi(ip[0]));
         
     // Push the root to the queue
     queue<Node*> queue;
@@ -53,9 +51,9 @@ Node* buildTree(string str)
             
         // If the left child is not null
         if(currVal != "N") {
-                
-            // Create the left child for the current node
-            currNode->left = newNode(stoi(currVal));
+
+            // Create the left child for the current Node
+            currNode->left = new Node(stoi(currVal));
                 
             // Push it to the queue
             queue.push(currNode->left);
@@ -71,7 +69,7 @@ Node* buildTree(string str)
         if(currVal != "N") {
                 
             // Create the right child for the current node
-            currNode->right = newNode(stoi(currVal));
+            currNode->right = new Node(stoi(currVal));
                 
             // Push it to the queue
             queue.push(currNode->right);
@@ -82,51 +80,46 @@ Node* buildTree(string str)
     return root;
 }
 
-vector<int> reverseLevelOrder(Node* root);
+ // } Driver Code Ends
+//User function template for C++
 
-int main()
-{
-
-    int t;
-    scanf("%d ",&t);
-    while(t--)
-    {
-        string s;
-        getline(cin,s);
-        Node* root = buildTree(s);
-        vector<int> result = reverseLevelOrder(root);
-        for (int i = 0; i < result.size(); ++i)
-        {
-            cout<<result[i]<<" ";
-        }
-        cout<<endl;
-    }
-    return 1;
-}// } Driver Code Ends
-
-
-/*   
+/*
 struct Node
 {
     int data;
-    Node* left;
-    Node* right;
-}; */
-
-vector<int> reverseLevelOrder(Node *root)
-{
-    // code here
-    vector<int> ans;
-    if(!root) return ans;
-    queue<Node *> q;
-    q.push(root);
-    while(!q.empty()) {
-        Node *t = q.front();
-        q.pop();
-        if(t->right) q.push(t->right);
-        if(t->left) q.push(t->left);
-        ans.push_back(t->data);
+    struct Node* left;
+    struct Node* right;
+    
+    Node(int x){
+        data = x;
+        left = right = NULL;
     }
-    reverse(ans.begin(), ans.end());
-    return ans;
-}
+};
+*/
+class Solution{
+    private:
+        int ans = 0;
+    public:
+    //Function to find the height of a binary tree.
+    int height(struct Node* node){
+        // code here 
+        if(!node) return 0;
+        return 1 + max(height(node->left), height(node->right));
+    }
+};
+
+// { Driver Code Starts.
+int main()
+{
+    int t;
+	scanf("%d ",&t);
+    while(t--)
+    {
+        string treeString;
+		getline(cin,treeString);
+		Node* root = buildTree(treeString);
+        Solution ob;
+		cout<<ob.height(root)<<endl;
+    }
+    return 0;
+}  // } Driver Code Ends
