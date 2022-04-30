@@ -73,5 +73,6 @@ int main() {
         else root = temp->right;
     }
     cout << findLargestSubtreeSum(root) << endl;
+    free(root);
     return 0;
 }
