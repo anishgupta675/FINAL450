@@ -3,68 +3,43 @@
 using namespace std;
 
 class Solution {
+    bool find(vector<string> wordList, string word) {
+        for(auto i: wordList)
+            if(!word.compare(i)) return true;
+        return false;
+    }
 public:
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
-        unordered_map<string, vector<string>> map;      
-        if (find(wordList.begin(),wordList.end(),beginWord) == wordList.end()){
-            wordList.push_back(beginWord);
-        }
-        
-        int len = wordList[0].size();
-        for (int i=0; i< wordList.size(); i++){
-            for (int j=0; j< len; j++){
-                string p = wordList[i];
-                p.replace(j,1,"*");
-                if (map.find(p) == map.end()){
-                    vector v = {wordList[i]};
-                    map.emplace(p,v);
-                }
-                else{
-                    map[p].push_back(wordList[i]);
-                }
-            }
-        }
-        int transform = 1;    
-        int level_pop = 0;
-        unordered_set<string> visited;
+        if(!find(wordList, endWord)) return 0;
+        unordered_map<string, bool> Vmap;
+        for(int i = 0; i < wordList.size(); i++)
+            Vmap[wordList[i]] = false;
         queue<string> q;
+        int length = 1;
         q.push(beginWord);
-        visited.emplace(beginWord);
-        int level_node = 1; 
-        int n = 0;
-        bool edge = false;
-        while (!q.empty()){
-            if (q.front() == endWord){
-                return transform;
+        Vmap[beginWord] = true;
+        while(!q.empty()) {
+            int sz = q.size();
+            for(int i = 0; i < sz; i++) {
+                string w = q.front();
+                q.pop();
+                if(!w.compare(endWord)) return length;
+                wordMatch(w, Vmap, q);
             }
-            for (int k=0; k< len; k++){
-                string curr = q.front();
-                curr.replace(k,1,"*");
-                for (int i=0; i< map[curr].size(); i++){
-                    if (visited.find(map[curr][i]) == visited.end()){
-                        q.push(map[curr][i]);
-                        n ++;
-                        visited.emplace(map[curr][i]);
-                        edge = true;
-                    }     
-                }  
-            }
-         
-            level_pop ++;            
-            if (level_pop == level_node){
-                if (edge){
-                    transform ++;
-                }
-                level_pop = 0;
-                level_node = n;
-                edge = false;
-                n=0;
-            }
-            
-            q.pop();  
-            
+            length++;
         }
         return 0;
+    }
+    void wordMatch(string w, unordered_map<string, bool> Vmap, queue<string> q) {
+        for(int i = 0; i < w.length(); i++) {
+            for(int j = 0; j < 26; j++) {
+                w[i] = (char)('a' + j);
+                if(Vmap.find(w) != Vmap.end() && !Vmap[w]) {
+                    q.push(w);
+                    Vmap[w] = true;
+                }
+            }
+        }
     }
 };
 
@@ -83,5 +58,6 @@ int main() {
         wordList.push_back(data);
     }
     cout << sol.ladderLength(beginWord, endWord, wordList) << endl;
+
     return 0;
 }
