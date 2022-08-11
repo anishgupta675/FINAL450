@@ -51,10 +51,10 @@ class Solution
       q.push(node);
       while(!q.empty()) {
         Node *t = q.front();
-        ans.push_back(t->data);
+        q.pop();
         if(t->left) q.push(t->left);
         if(t->right) q.push(t->right);
-        q.pop();
+        ans.push_back(t->data);
       }
       return ans;
     }
