@@ -50,7 +50,8 @@ class Solution
       queue<Node *> q;
       q.push(node);
       while(!q.empty()) {
-        for(int i = 0; i < q.size(); i++) {
+        int size = q.size();
+        for(int i = 0; i < size; i++) {
             Node *t = q.front();
             q.pop();
             if(t->left) q.push(t->left);
