@@ -23,30 +23,21 @@ class GFG {
 //User function Template for Java
 
 class Solution {
-    int lps(String s) {
-        // code here
-        int start = 0;
-        int end = 1;
-        int[] store = new int[s.length()];
-    
-        while( end < s.length() ){
-        
-            if( s.charAt(start) == s.charAt(end) ){
-                store[end] = start+1;
-                start+=1;
-                end+=1;
-            }
-            else{
-            
-                if( start == 0){
-                    store[end] = 0;
-                    end=end+1;
-                }else{
-                    start = store[start-1];
-                }
+    int[] getLPS(String s) {
+        int prevLPS = 0, i = 1;
+        int[] lps = new int[s.length()];
+        while(i < s.length()) {
+            if(s.charAt(prevLPS) == s.charAt(i)) lps[i++] = ++prevLPS;
+            else {
+                if(prevLPS == 0) lps[i++] = 0;
+                else prevLPS = lps[prevLPS - 1];
             }
         }
-        
-        return store[s.length()-1];
+        return lps;
+    }
+    int lps(String s) {
+        // code here
+        int[] lps = getLPS(s);
+        return lps[s.length() - 1];
     }
 }
