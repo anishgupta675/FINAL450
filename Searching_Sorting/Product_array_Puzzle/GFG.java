@@ -6,23 +6,24 @@ import java.util.*;
 
 class GFG{
     public static void main(String args[]) throws IOException { 
-        Scanner sc = new Scanner(System.in);
-        int t = sc.nextInt();
-        while(t > 0){
-        	int n = sc.nextInt();
-        	int[] array = new int[n];
-        	for (int i=0; i<n ; i++ ) {
-        		array[i] = sc.nextInt();
-        	}
-            Solution ob = new Solution();
-            long[] ans = new long[n];
-            ans = ob.productExceptSelf(array, n); 
+        try (Scanner sc = new Scanner(System.in)) {
+            int t = sc.nextInt();
+            while(t > 0){
+            	int n = sc.nextInt();
+            	int[] array = new int[n];
+            	for (int i=0; i<n ; i++ ) {
+            		array[i] = sc.nextInt();
+            	}
+                Solution ob = new Solution();
+                long[] ans = new long[n];
+                ans = ob.productExceptSelf(array, n);
 
-           	for (int i = 0; i < n; i++) { 
-				System.out.print(ans[i]+" ");
-			} 
-            System.out.println();
-            t--;
+               	for (int i = 0; i < n; i++) { 
+            		System.out.print(ans[i]+" ");
+            	} 
+                System.out.println();
+                t--;
+            }
         }
     } 
 } 
@@ -37,7 +38,7 @@ class GFG{
 
 class Solution 
 { 
-	public static long[] productExceptSelf(int arr[], int n) 
+	public long[] productExceptSelf(int arr[], int n) 
 	{ 
         // code here
         long[] left = new long[n];

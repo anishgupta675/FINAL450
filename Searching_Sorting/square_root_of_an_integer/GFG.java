@@ -2,7 +2,6 @@
 //Initial Template for Java
 
 import java.io.*;
-import java.util.*;
 
 class GFG {
     public static void main(String args[]) throws IOException {
@@ -23,7 +22,7 @@ class GFG {
 //User function Template for Java
 
 class Solution {
-    static int countSquares(int N) {
+    int countSquares(int N) {
         // code here
         return (int)Math.sqrt(N - 1);
     }

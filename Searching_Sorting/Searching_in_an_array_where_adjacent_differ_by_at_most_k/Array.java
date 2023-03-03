@@ -7,7 +7,6 @@
 /*package whatever //do not write package name here */
 
 import java.io.*;
-import java.util.*;
 
 
 class Array {
@@ -52,7 +51,7 @@ class Complete{
     
    
     // Function for finding maximum and value pair
-    public static int search (int arr[], int n, int x, int k) {
+    public int search (int arr[], int n, int x, int k) {
         //Complete the function
         for(int i = Math.max(Math.abs(x - arr[0]) / k, 0); i < n; i+= Math.max(Math.abs(x - arr[i]) / k, 1))
             if(arr[i] == x) return i;

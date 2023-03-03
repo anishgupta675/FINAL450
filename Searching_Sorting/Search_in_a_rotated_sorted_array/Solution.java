@@ -1,4 +1,3 @@
-import java.util.*;
 class Solution {
     private int binarySearch(int[] nums, int low, int high, int target) {
         if(low > high) return -1;

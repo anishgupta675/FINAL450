@@ -1,6 +1,5 @@
 //{ Driver Code Starts
     import java.util.*;
-    import java.lang.*;
     import java.io.*;
     
     class GFG {
@@ -47,7 +46,7 @@
             }
             return count;
         }
-        static void sortBySetBitCount(Integer arr[], int n)
+        void sortBySetBitCount(Integer arr[], int n)
         { 
             // Your code goes here
             ArrayList<ArrayList<Integer>> count = new ArrayList<ArrayList<Integer>>();

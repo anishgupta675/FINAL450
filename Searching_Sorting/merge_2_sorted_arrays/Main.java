@@ -1,8 +1,6 @@
 //{ Driver Code Starts
 //Initial Template for Java
 
-import java.util.*;
-import java.io.*;
 import java.io.*;
 
 public class Main
@@ -47,7 +45,7 @@ public class Main
 class Solution
 {
     //Function to merge the arrays.
-    public static void merge(long arr1[], long arr2[], int n, int m) 
+    public void merge(long arr1[], long arr2[], int n, int m) 
     {
         // code here 
         for(int i = m - 1; i >= 0; i--) {
