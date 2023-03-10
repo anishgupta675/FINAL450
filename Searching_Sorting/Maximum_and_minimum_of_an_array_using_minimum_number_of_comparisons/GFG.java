@@ -1,3 +1,5 @@
+package Searching_Sorting.Maximum_and_minimum_of_an_array_using_minimum_number_of_comparisons;
+
 //{ Driver Code Starts
 //Initial Template for Java
 

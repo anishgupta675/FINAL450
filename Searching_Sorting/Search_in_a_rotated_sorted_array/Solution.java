@@ -1,3 +1,5 @@
+package Searching_Sorting.Search_in_a_rotated_sorted_array;
+
 class Solution {
     private int binarySearch(int[] nums, int low, int high, int target) {
         if(low > high) return -1;
