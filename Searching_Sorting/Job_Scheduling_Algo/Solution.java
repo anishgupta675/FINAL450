@@ -1,7 +1,7 @@
 //{ Driver Code Starts
     import java.io.*;
-    import java.lang.*;
-    import java.util.*;
+    import java.util.Arrays;
+    import java.util.Comparator;
     
     class Job {
         int id, profit, deadline;
@@ -34,8 +34,11 @@
                 Solution ob = new Solution();
                 
                 //function call
+                /*
                 int[] res = ob.JobScheduling(arr, n);
                 System.out.println (res[0] + " " + res[1]);
+                */
+                System.out.println(ob.JobScheduling(arr, n));
             }
         }
     }
@@ -44,30 +47,29 @@
     
     class Solution
     {
+
+        private int delayConflict(Job[] arr, int n) {
+            for(int i = arr.length - 1; i >= 0; i--) if(arr[i].deadline <= arr[n].deadline - 1) return i;
+            return -1;
+        }
+
+        private int maximizeProfit(Job[] arr, int n) {
+            if(n == 1) return arr[0].profit;
+            int incl_profit = arr[n - 1].profit;
+            int i = delayConflict(arr, n - 1);
+            if(i != -1) incl_profit+= maximizeProfit(arr, i + 1);
+            int excl_profit = maximizeProfit(arr, n - 1);
+            return Math.max(incl_profit, excl_profit);
+        }
+
         //Function to find the maximum profit and the number of jobs done.
-        int[] JobScheduling(Job arr[], int n)
+        int JobScheduling(Job arr[], int n)
         {
             // Your code here
-            Arrays.sort(arr, (a,b) -> (b.profit - a.profit));
-            int max_deadline = 0;
-            for(int i=0; i<n; i++) {
-                if(arr[i].deadline > max_deadline)
-                max_deadline = arr[i].deadline;
-            }
-            int doJob[] = new int[max_deadline+1];
-            Arrays.fill(doJob, -1);
-            int profit = 0, job_cnt = 0;
-            for(int i=0; i<n; i++) {
-                for(int j=arr[i].deadline; j>0; j--) {
-                    if(doJob[j] == -1) {
-                        doJob[j] = arr[i].id;
-                        job_cnt++;
-                        profit += arr[i].profit;
-                        break;
-                    }
-                }
-            }
-            return new int[] { job_cnt, profit };
+            Arrays.sort(arr, new Comparator<Job>() {
+                public int compare(Job j1, Job j2) { return j1.deadline - j2.deadline; }
+            });
+            return maximizeProfit(arr, n);
         }
     }
     
