@@ -41,21 +41,14 @@ class Solution
     {
         // Code here
         int xor = 0;
-		for(int i = 0; i<nums.length; i++) xor = xor ^ nums[i];
-		int count = 0;
-		while(xor>0){
-			if((xor&1)==1) break;
-			count++;
-			xor = xor >> 1;
-		}
-		
-		int mask = 1 << count;
-		int ans[] = new int[2];
-		for(int i = 0; i<nums.length; i++){
-			if((nums[i]&mask)==0) ans[0] ^= nums[i];
-			else ans[1] ^= nums[i];
-		}
-		Arrays.sort(ans);
-		return ans;
+        int[] res = new int[2];
+        for(int i : nums) xor^= i;
+        xor&= -xor;
+        for(int i : nums) {
+            if((xor & i) != 0) res[0]^= i;
+            else res[1]^= i;
+        }
+        Arrays.sort(res);
+        return res;
     }
 }
