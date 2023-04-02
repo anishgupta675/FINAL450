@@ -13,7 +13,7 @@ class Solution {
         Arrays.sort(potions);
         int[] res = new int[spells.length];
         for(int i = 0; i < res.length; i++) {
-            getPairs(potions, 0, potions.size(), spells[i], success);
+            getPairs(potions, 0, potions.length, spells[i], success);
             res[i] = ans;
             ans = 0;
         }
