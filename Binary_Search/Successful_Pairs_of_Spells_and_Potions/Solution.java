@@ -4,7 +4,7 @@ class Solution {
     private void getPairs(int[] potions, int low, int high, int spell, long success) {
         if(low > high) return;
         int mid = (low + high) >> 1;
-        if(checkPairs(spells, potions[mid], success)) {
+        if(checkPairs(spell, potions[mid], success)) {
             ans = mid;
             getPairs(potions, low, mid - 1, spell, success);
         } else getPairs(potions, mid + 1, high, spell, success);
