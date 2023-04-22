@@ -123,10 +123,20 @@ class TestClass {
                             cm_sq_fnd = true;
                             break;
                         }
-                        // TODO
+                        roll_hash_ptr++;
+                        k2_col_start++;
+                        k2_col_end++;
                     }
+                    if(cm_sq_fnd) break;
+                    k2_row_start++;
+                    k2_row_end++;
                 }
             }
+            if(cm_sq_fnd) {
+                ans = mid;
+                low = mid + 1;
+            } else high = mid - 1;
+            found_k1.clear();
         }
         return ans;
     }
@@ -138,6 +148,7 @@ class TestClass {
         int x = sc.nextInt(), y = sc.nextInt();
         int[][] b = new int[x][y];
         for(int i = 0; i < x; i++) for(int j = 0; j < y; j++) b[i][j] = sc.nextInt();
+        System.out.println(maximizeSubsquare(a, b, n, m, x, y));
     }
 
     public static void main(String args[] ) throws Exception {
