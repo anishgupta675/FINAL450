@@ -13,14 +13,17 @@ class Solution
     int lcs(int x, int y, string s1, string s2)
     {
         // your code here
-        vector<vector<int>> dp(s1.length() + 1, vector<int>(s2.length() + 1));
-        for(int i = 1; i <= x; i++) {
-            for(int j = 1; j <= y; j++) {
-                if(s1[i] == s2[j]) dp[i][j] = dp[i - 1][j - 1] + 1;
-                else dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+        vector<int> dp(y + 1);
+        for(int i = 0; i < x; i++) {
+            int prev = dp[0];
+            for(int j = 1; j < dp.size(); j++) {
+                int temp = dp[j];
+                if(s1[i] != s2[j - 1]) dp[j] = max(dp[j], dp[j - 1]);
+                else dp[j] = prev + 1;
+                prev = temp;
             }
         }
-        return dp[x][y];
+        return dp.back();
     }
 };
 
